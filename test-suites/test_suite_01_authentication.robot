@@ -21,6 +21,7 @@ Scenario 01: Successful Login
     ...                             ${PASSWORD}
     ...                             You logged into a secure area!
 
+#Using [Template] option for test same scenario with different input and/or output data (Data-driven stye)
 Scenario 02: Unsuccessful Login
     [Template]                      Login with invalid credentials
     invalid                         ${PASSWORD}                       Your username is invalid!
