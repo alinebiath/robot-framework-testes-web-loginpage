@@ -1,45 +1,33 @@
 *** Settings ***
-Documentation     Test suite to validate the login action in website:
-...               https://the-internet.herokuapp.com/login
+
+Documentation     Test suite to validate the login action in
+...               website: https://the-internet.herokuapp.com/login
 
 Resource          ../keywords/keywords_01_authentication.robot
 
 Suite Setup       Open navigator
 Suite Teardown    Close navigator
 
-Test Template     Login with invalid credentials
-
 ***Variables***
+
 ${USERNAME}       tomsmith
 ${PASSWORD}       SuperSecretPassword!
 
 
 *** Test Cases ***
-Invalid username
-    ...    invalid
-    ...    ${PASSWORD}
-    ...    Your username is invalid!
 
-Invalid password
-    ...    ${USERNAME}
-    ...    invalid
-    ...    Your password is invalid!
+Scenario 01: Successful Login
+    Login with valid credentials    ${USERNAME}
+    ...                             ${PASSWORD}
+    ...                             You logged into a secure area!
 
-Empty username and password
-    ...    ${EMPTY}
-    ...    ${EMPTY}
-    ...    Your username is invalid!
-
+Scenario 02: Unsuccessful Login
+    [Template]                      Login with invalid credentials
+    invalid                         ${PASSWORD}                       Your username is invalid!
+    ${USERNAME}                     invalid                           Your password is invalid!
+    ${EMPTY}                        ${EMPTY}                          Your username is invalid!
+    ${USERNAME}                     ${EMPTY}                          Your password is invalid!
+    ${EMPTY}                        ${PASSWORD}                       Your username is invalid!
 
 
 
-
-# Scenario: Login with valid credentials
-#                 [Tags]                                                                                          existproduct
-#                 When I search for the product "Blouse"
-#                 I should see the searched product "Blouse"
-
-# Scenario: Login with invalid credentials
-#                 [Tags]                                                                                          noproduct
-#                 When I search for the product "non existing product"
-#                 Then I should see the message "No results were found for your search "non existing product""
