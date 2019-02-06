@@ -19,11 +19,31 @@ Close navigator
     selenium.Close Browser
 ###Setup and Teardown End
 
+Login with valid credentials
+    [Arguments]                               ${username}
+    ...                                       ${password}
+    ...                                       ${error_msg}
+
+    selenium.Input Text                       id=username
+    ...                                       ${username}
+
+    selenium.Input Password                   id=password
+    ...                                       ${password}
+
+    selenium.Click Element                    css=#login > button
+
+    selenium.Wait Until Element Is Visible    id=flash
+    ...                                       timeout=15s
+
+    selenium.Element Should Contain           id=flash
+    ...                                       ${error_msg}
+
 Login with invalid credentials
     [Arguments]                               ${username}
     ...                                       ${password}
     ...                                       ${error_msg}
 
+    selenium.Go To                            ${URL}
     selenium.Input Text                       id=username
     ...                                       ${username}
 
