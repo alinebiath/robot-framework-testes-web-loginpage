@@ -38,12 +38,14 @@ Login with valid credentials
     selenium.Element Should Contain           id=flash
     ...                                       ${error_msg}
 
+    selenium.Click Element                    link=Logout
+
+
 Login with invalid credentials
     [Arguments]                               ${username}
     ...                                       ${password}
     ...                                       ${error_msg}
 
-    selenium.Go To                            ${URL}
     selenium.Input Text                       id=username
     ...                                       ${username}
 

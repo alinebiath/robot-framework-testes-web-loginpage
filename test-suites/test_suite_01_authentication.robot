@@ -26,6 +26,8 @@ Scenario 02: Unsuccessful Login
     invalid                         ${PASSWORD}                       Your username is invalid!
     ${USERNAME}                     invalid                           Your password is invalid!
     ${EMPTY}                        ${EMPTY}                          Your username is invalid!
+    ${USERNAME}                     ${EMPTY}                          Your password is invalid!
+    ${EMPTY}                        ${PASSWORD}                       Your username is invalid!
 
 
 
