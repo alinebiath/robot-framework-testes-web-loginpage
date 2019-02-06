@@ -1,45 +1,45 @@
 *** Settings ***
-Documentation     Test suite to validate behaviour of the consults and
-...               interactions with shopping cart in website:
-...               http://automationpractice.com/index.php
+Documentation     Test suite to validate the login action in website:
+...               https://the-internet.herokuapp.com/login
 
-Resource          ../keywords/keywords_01_consults.robot
+Resource          ../keywords/keywords_01_authentication.robot
 
 Suite Setup       Open navigator
 Suite Teardown    Close navigator
 
-Test Setup        Given I am on the home page
+Test Template     Login with invalid credentials
+
+***Variables***
+${USERNAME}       tomsmith
+${PASSWORD}       SuperSecretPassword!
 
 
 *** Test Cases ***
-Scenario 01: Search for existing products
-    [Tags]                                                                                          existproduct
-    When I search for the product "Blouse"
-    I should see the searched product "Blouse"
+Invalid username
+    ...    invalid
+    ...    ${PASSWORD}
+    ...    Your username is invalid!
 
-Scenario 02: Search for non existing products
-    [Tags]                                                                                          noproduct
-    When I search for the product "non existing product"
-    Then I should see the message "No results were found for your search "non existing product""
+Invalid password
+    ...    ${USERNAME}
+    ...    invalid
+    ...    Your password is invalid!
 
-Scenario 03: List products
-    [Tags]                                                                                          listproduct
-    When I select the "WOMEN" category in the main menu categories
-    And I select the sub-category "Summer Dresses"
-    Then I should see the page with the selected product "Summer Dresses"
+Empty username and password
+    ...    ${EMPTY}
+    ...    ${EMPTY}
+    ...    Your username is invalid!
 
-Scenario 04: Add products to shopping cart
-    [Tags]                                                                                          addproduct
-    And I search for the product "t-shirt"
-    When I should see the searched product "t-shirt"
-    And I add to shopping cart the listed product
-    And I proceed to checkout
-    Then I should see the shopping cart page with the products and its data and values
 
-Scenario 05: Remove products
-    [Tags]                                                                                          removeproduct
-    [Setup]                                                                                         I have at least one product in my cart
-    When I access the shopping cart
-    And I remove the product
-    Then I should confirm the exclusion
 
+
+
+# Scenario: Login with valid credentials
+#                 [Tags]                                                                                          existproduct
+#                 When I search for the product "Blouse"
+#                 I should see the searched product "Blouse"
+
+# Scenario: Login with invalid credentials
+#                 [Tags]                                                                                          noproduct
+#                 When I search for the product "non existing product"
+#                 Then I should see the message "No results were found for your search "non existing product""
