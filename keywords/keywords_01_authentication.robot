@@ -40,6 +40,14 @@ Login with valid credentials
 
     selenium.Click Element                    link=Logout
 
+    selenium.Capture Page Screenshot          filename=login_succesful.png
+
+    system.Remove Files                       ${CURDIR}/../output/login_unsuccesful-1.png
+    ...                                       ${CURDIR}/../output/login_unsuccesful-2.png
+    ...                                       ${CURDIR}/../output/login_unsuccesful-3.png
+    ...                                       ${CURDIR}/../output/login_unsuccesful-4.png
+    ...                                       ${CURDIR}/../output/login_unsuccesful-5.png
+
 
 Login with invalid credentials
     [Arguments]                               ${username}
@@ -59,6 +67,9 @@ Login with invalid credentials
 
     selenium.Element Should Contain           id=flash
     ...                                       ${error_msg}
+
+    #using {index} in the filename option, the file will not ovwerwritten
+    selenium.Capture Page Screenshot          filename=login_unsuccesful-{index}.png
 
 
 
