@@ -42,6 +42,7 @@ Login with valid credentials
 
     selenium.Capture Page Screenshot          filename=login_succesful.png
 
+    #removing existing screenshot files from output directory
     system.Remove Files                       ${CURDIR}/../output/login_unsuccesful-1.png
     ...                                       ${CURDIR}/../output/login_unsuccesful-2.png
     ...                                       ${CURDIR}/../output/login_unsuccesful-3.png
